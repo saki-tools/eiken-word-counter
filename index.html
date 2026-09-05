@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="英検ライティングの単語数を自動でカウント。入力に応じてリアルタイムに語数を表示し、各級の目安と照らし合わせできるツール。プライバシーを守って、ブラウザ内で完結します。">
+  <meta name="keywords" content="英検,ライティング,単語数,語数チェック,カウント,英文">
+  <meta name="author" content="Eiken Word Counter">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="英検ライティング語数チェッカー | 無料ツール">
+  <meta property="og:description" content="英検ライティングの単語数を自動でカウント。各級の目安と照らし合わせできるシンプルなツール。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <title>英検ライティング語数チェッカー | 無料ツール</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "英検ライティング語数チェッカー",
+    "description": "英検ライティングの単語数を自動でカウントするツール",
+    "url": "https://saki-selftrue.github.io/eiken-word-counter/",
+    "applicationCategory": "UtilityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>英検ライティング<br>語数チェッカー</h1>
+      <p class="subtitle">英文を入力するだけで、単語数が自動でカウントできます</p>
+    </header>
+
+    <main>
+      <section class="grade-section">
+        <div class="grade-select-group">
+          <label for="gradeSelect">受検級を選択してください</label>
+          <select id="gradeSelect" class="grade-select">
+            <option value="">級を選択</option>
+            <option value="grade3">英検3級</option>
+            <option value="pre2">英検準2級</option>
+            <option value="pre2plus">英検準2級プラス</option>
+            <option value="grade2">英検2級</option>
+            <option value="pre1">英検準1級</option>
+            <option value="grade1">英検1級</option>
+          </select>
+        </div>
+
+        <div class="problem-type-group" id="problemTypeGroup" style="display: none;">
+          <label for="problemTypeSelect">問題タイプを選択してください</label>
+          <select id="problemTypeSelect" class="grade-select">
+            <option value="">問題タイプを選択</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="target-section" id="targetSection" style="display: none;">
+        <div class="target-box">
+          <p class="target-label">このテストでの目安語数</p>
+          <p class="target-range" id="targetRange">-</p>
+          <p class="target-note">※ 出題形式・語数の目安は変更される場合があります。受験前に<a href="https://www.eiken.or.jp/" target="_blank" rel="noopener noreferrer">英検公式サイト</a>の最新情報をご確認ください。</p>
+        </div>
+      </section>
+
+      <section class="input-section">
+        <h2>英文を入力してください</h2>
+        <textarea id="textInput" class="text-input" placeholder="ここに英文を入力・貼り付けてください..."></textarea>
+        <button id="clearBtn" class="btn-clear">クリア</button>
+      </section>
+
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">単語数</div>
+            <div class="stat-value" id="wordCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">文字数</div>
+            <div class="stat-value" id="charCount">0</div>
+          </div>
+          <div class="stat-card status-card" id="statusCard">
+            <div class="stat-label">ステータス</div>
+            <div class="stat-value status-value" id="statusValue">---</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="usage-section">
+        <h2>使い方</h2>
+        <ol class="usage-list">
+          <li>受検級を選択する</li>
+          <li>問題タイプを選択する</li>
+          <li>英文をテキストボックスに入力または貼り付ける</li>
+          <li>単語数と目安語数がリアルタイムで表示されます</li>
+          <li>ステータスで目安の範囲内かどうか確認できます</li>
+        </ol>
+      </section>
+
+      <section class="privacy-section">
+        <h3>プライバシーについて</h3>
+        <p>入力した英文は、ブラウザ内で処理されます。サーバーに送信されたり、保存されたりすることはありません。安心してご利用ください。</p>
+      </section>
+
+      <section class="faq-section">
+        <h2>よくあるご質問</h2>
+
+        <details>
+          <summary><strong>英検ライティングの単語数はどう数える？</strong></summary>
+          <p>このツールは、スペースで区切られた単語を1語として数えています。ハイフン（-）で繋がった単語（例：well-known）も1語として数えます。一般的な英単語カウント方式に準拠しています。</p>
+        </details>
+
+        <details>
+          <summary><strong>短縮形（don't, it'sなど）はどう数えられる？</strong></summary>
+          <p>短縮形も1語として数えられます。例えば、「don't」は1語です。</p>
+        </details>
+
+        <details>
+          <summary><strong>数字や記号は単語として数えられる？</strong></summary>
+          <p>このツールでは、スペースで区切られたものを単語として数えているため、単独の数字や記号も単語数に含まれる場合があります。英検の正式なカウント方法とは異なる可能性があるため、公式情報をご確認ください。</p>
+        </details>
+
+        <details>
+          <summary><strong>目安語数を超えた場合、減点されますか？</strong></summary>
+          <p>英検の採点基準は、英検公式サイトで公開されています。語数がわずかに超過した場合の減点については、公式情報をご確認ください。</p>
+        </details>
+
+        <details>
+          <summary><strong>目安語数未満の場合はどうなる？</strong></summary>
+          <p>語数が目安未満の場合、採点に影響する可能性があります。英検の公式ガイドラインをご確認の上、適切な語数での回答を心がけてください。</p>
+        </details>
+
+        <details>
+          <summary><strong>このツールのカウント方式は公式と同じ？</strong></summary>
+          <p>このツールは一般的な英単語カウント方式に準拠していますが、英検公式のカウント方法と異なる可能性があります。最終的には公式情報に基づき、学習を進めてください。</p>
+        </details>
+      </section>
+
+      <section class="note-section">
+        <h3>英語学習・子どもとの暮らしについて</h3>
+        <p>元英語教師の母が、英語教育や石垣島での子育てについてnoteで発信しています。</p>
+        <a href="https://note.com/saki_selftrue" class="note-link" target="_blank" rel="noopener noreferrer">noteを読む →</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 英検ライティング語数チェッカー</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
